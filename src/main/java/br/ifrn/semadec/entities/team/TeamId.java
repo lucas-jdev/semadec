@@ -5,8 +5,10 @@ import javax.persistence.OneToOne;
 
 import br.ifrn.semadec.entities.course.Course;
 import br.ifrn.semadec.entities.sport.Sport;
+import lombok.Builder;
 
 @Embeddable
+@Builder
 public class TeamId {
 
     @OneToOne
