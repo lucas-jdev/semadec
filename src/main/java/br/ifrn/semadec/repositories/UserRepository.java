@@ -1,6 +1,7 @@
 package br.ifrn.semadec.repositories;
 
 import java.util.UUID;
+import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -59,7 +60,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
             AND
                 lower(u.fullName) LIKE %?1%
                 """)
-    Iterable<User> findByFullName(String fullName);
+    Collection<User> findByFullName(String fullName);
 
     @Query("""
             SELECT
@@ -72,7 +73,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
                 lower(u.academicEmail) LIKE %?1%
                 or lower(u.personalEmail) LIKE %?1%
                 """)
-    Iterable<User> findAllByEmail(String email);
+    Collection<User> findAllByEmail(String email);
 
     @Query("""
             SELECT
@@ -84,7 +85,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
             AND
                 lower(u.username) LIKE %?1%
                 """)
-    Iterable<User> findAllByUsername(String username);
+    Collection<User> findAllByUsername(String username);
 
     @Query("""
             SELECT
@@ -96,9 +97,8 @@ public interface UserRepository extends JpaRepository<User, UUID> {
             AND
                 u.cpf LIKE %?1%
                 """)
-    Iterable<User> findAllByCpf(String cpf);
+    Collection<User> findAllByCpf(String cpf);
 
-    // login
     @Query("""
             SELECT
                 u
@@ -160,5 +160,5 @@ public interface UserRepository extends JpaRepository<User, UUID> {
             WHERE
                 u.status = ?1
                 """)
-    Iterable<User> findByStatus(UserStatus status);
+    Collection<User> findByStatus(UserStatus status);
 }
