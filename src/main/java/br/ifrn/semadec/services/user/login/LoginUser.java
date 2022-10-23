@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.ifrn.semadec.entities.user.User;
+import br.ifrn.semadec.exceptions.not_found.UserNotFoundException;
 import br.ifrn.semadec.repositories.UserRepository;
 
 @Service
@@ -27,7 +28,7 @@ public class LoginUser {
     private static void _validateUser(final User userFound) {
         boolean userNotFound = userFound == null;
         if (userNotFound) {
-            throw new RuntimeException("User not found");
+            throw new UserNotFoundException();
         }
     }
 
