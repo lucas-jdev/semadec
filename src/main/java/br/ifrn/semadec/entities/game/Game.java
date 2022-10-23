@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,10 +39,14 @@ public class Game {
     @OneToOne
     private Sport sport;
 
-    @OneToOne
+    @OneToMany
     private List<Team> teams;
 
-    @OneToOne
+    @OneToMany
     private List<Score> scores;
+
+    public void finishGame() {
+        this.status = StatusGame.FINISHED;
+    }
 
 }
