@@ -1,5 +1,7 @@
 package br.ifrn.semadec.services.user.read;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,7 @@ public class ReadUsersByFullName {
         throw new IllegalStateException("Service class");
     }
 
-    public static Iterable<User> execute(final String fullName) {
+    public static Collection<User> execute(final String fullName) {
         return userRepository.findByFullName(fullName);
     }
 
