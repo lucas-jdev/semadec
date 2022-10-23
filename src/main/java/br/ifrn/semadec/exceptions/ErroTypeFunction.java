@@ -1,4 +1,4 @@
-package br.ifrn.semadec.exceptions.not_found;
+package br.ifrn.semadec.exceptions;
 
 import graphql.ErrorType;
 
