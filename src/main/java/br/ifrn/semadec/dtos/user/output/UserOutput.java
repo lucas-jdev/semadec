@@ -7,11 +7,13 @@ import lombok.Data;
 @Builder
 public class UserOutput {
 
+    private String id;
     private String username;
     private String fullName;
     private String matriculation;
     private String phone;
     private String cpf;
     private String academicEmail;
+    private String personalEmail;
 
 }
