@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.graphql.execution.DataFetcherExceptionResolverAdapter;
 import org.springframework.stereotype.Component;
 
-import br.ifrn.semadec.exceptions.not_found.ErroTypeFunction;
-import br.ifrn.semadec.exceptions.not_found.Exception;
+import br.ifrn.semadec.exceptions.Exception;
+import br.ifrn.semadec.exceptions.ErroTypeFunction;
 import graphql.ErrorClassification;
 import graphql.ErrorType;
 import graphql.GraphQLError;
