@@ -4,6 +4,6 @@ public enum CategoryGender {
 
     MALE,
     FEMALE,
-    MIST
+    MIXED
 
 }
