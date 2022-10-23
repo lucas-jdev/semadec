@@ -19,6 +19,7 @@ public class Player {
     @OneToOne
     private User user;
 
+    private Number score;
     private int shirtNumber;
     private String position;
 
