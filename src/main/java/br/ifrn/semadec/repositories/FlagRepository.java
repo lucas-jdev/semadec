@@ -1,6 +1,7 @@
 package br.ifrn.semadec.repositories;
 
 import java.util.UUID;
+import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -29,6 +30,6 @@ public interface FlagRepository extends JpaRepository<Flag, UUID> {
             WHERE
                 lower(f.name) LIKE ?1%
             """)
-    Iterable<Flag> findByName(String name);
+    Collection<Flag> findByName(String name);
 
 }

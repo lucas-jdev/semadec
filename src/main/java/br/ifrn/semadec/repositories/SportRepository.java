@@ -1,6 +1,7 @@
 package br.ifrn.semadec.repositories;
 
 import java.util.UUID;
+import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,9 +19,9 @@ public interface SportRepository extends JpaRepository<Sport, UUID> {
             FROM
                 Sport s
             WHERE
-                s.categoryGender = ?1
+                s.categoryGender LIKE ?1
             """)
-    Sport findByCategoryGender(CategoryGender categoryGender);
+    Collection<Sport> findByCategoryGender(CategoryGender categoryGender);
 
     @Query("""
             SELECT
@@ -30,7 +31,7 @@ public interface SportRepository extends JpaRepository<Sport, UUID> {
             WHERE
                 lower(s.name) LIKE ?1%
             """)
-    Iterable<Sport> findByName(String name);
+    Collection<Sport> findByName(String name);
 
     @Query("""
             SELECT
@@ -40,6 +41,6 @@ public interface SportRepository extends JpaRepository<Sport, UUID> {
             WHERE
                 lower(s.categorySport) LIKE ?1%
             """)
-    Iterable<Sport> findByCategory(String category);
+    Collection<Sport> findByCategory(String category);
 
 }

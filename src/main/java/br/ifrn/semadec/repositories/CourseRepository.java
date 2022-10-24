@@ -1,6 +1,7 @@
 package br.ifrn.semadec.repositories;
 
 import java.util.UUID;
+import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -29,6 +30,6 @@ public interface CourseRepository extends JpaRepository<Course, UUID> {
             WHERE
                 lower(c.name) LIKE ?1%
             """)
-    Iterable<Course> findByName(String name);
+    Collection<Course> findByName(String name);
 
 }
