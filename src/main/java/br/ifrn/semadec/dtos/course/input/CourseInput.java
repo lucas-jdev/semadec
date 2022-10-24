@@ -11,5 +11,8 @@ public class CourseInput {
     private String description;
     private String acronym;
     private Number score;
+    private String colorPrimary;
+    private String colorSecondary;
+    private String level;
     private byte[] logo;
 }
