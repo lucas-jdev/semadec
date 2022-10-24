@@ -11,12 +11,12 @@ import br.ifrn.semadec.repositories.UserRepository;
 @Service
 public class CreateUser {
 
+    @Autowired
+    private static UserRepository userRepository;
+
     private CreateUser() {
         throw new IllegalStateException("Service class");
     }
-
-    @Autowired
-    private static UserRepository userRepository;
 
     public static UserOutput execute(final UserInput input) {
         final var user = _createUserWithDTO(input);
