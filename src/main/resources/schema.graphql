@@ -1,0 +1,287 @@
+#* types
+
+type SocialNetwork {
+  twitter: String
+  facebook: String
+  instagram: String
+  tiktok: String
+}
+
+type TeamId {
+  sport: Sport!
+  course: Course!
+}
+
+# todo: SCHEMAS
+
+type User {
+  id: ID!
+  username: String!
+  fullName: String!
+  matriculation: String!
+  phone: String!
+  cpf: String!
+  academicEmail: String!
+  personalEmail: String!
+  gender: Gender
+  status: UserStatus
+  birthDate: LocalDate
+  socialNetworks: [SocialNetwork]
+  biography: String
+  avatar: String
+  flags: [Flag]
+  likes: Int
+}
+
+type Flag {
+  id: ID!
+  name: String!
+}
+
+type Player {
+  id: User!
+  position: String!
+  number: Int!
+  score: Float!
+}
+
+type Team {
+  id: TeamId!
+  players: [Player]
+  score: Score
+}
+
+type Score {
+  id: ID!
+  score: Float!
+}
+
+type Sport {
+  id: ID!
+  name: String!
+  categorySport: String!
+  minTeams: Int!
+  maxTeams: Int!
+  categoryGender: CategoryGender!
+}
+
+type Course {
+  id: ID!
+  name: String!
+  description: String
+  score: Float!
+  level: LevelOfCourse
+  colorPrimary: String!
+  colorSecondary: String!
+}
+
+type Edition {
+  id: ID!
+  name: String!
+  description: String
+  startDate: LocalDate!
+  endDate: LocalDate!
+  records: [Record]
+}
+
+type Record {
+  id: ID!
+  description: String!
+  date: LocalDateTime!
+  score: Float!
+  sport: Sport!
+  course: Course!
+  player: Player
+  teams: [Team]
+}
+
+type Game {
+  id: ID!
+  date: LocalDateTime!
+  status: StatusGame!
+  sport: Sport!
+  teams: [Team]
+  scores: [Score]
+}
+
+#******* ENUMS ***********#
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NOT_BINARY
+}
+
+enum CategoryGender {
+  MALE
+  FEMALE
+  MIXED
+}
+
+enum LevelOfCourse {
+  TECHNICIAN
+  TECHNOLOGIST
+  GRADUATION
+}
+
+enum StatusGame {
+  PENDING
+  PLAYING
+  FINISHED
+  CANCELED
+}
+
+#? ****** INPUTS ***********#
+
+input UserInput {
+  username: String!
+  fullName: String!
+  matriculation: String!
+  phone: String!
+  cpf: String
+  academicEmail: String!
+  personalEmail: String!
+  password: String!
+  gender: Gender
+  birthDate: LocalDate
+  socialNetworks: [SocialNetworkInput]
+  photo: String
+  biography: String
+}
+
+input SocialNetworkInput {
+  twitter: String
+  facebook: String
+  instagram: String
+  tiktok: String
+}
+
+input TeamIdInput {
+  sport: String!
+  course: String!
+}
+
+input TeamInput {
+  id: TeamIdInput!
+  scoreInstance: Float!
+  userId: String
+}
+
+input SportInput {
+  name: String!
+  categorySport: String!
+  minTeams: Int!
+  maxTeams: Int
+  courseInput: CourseInput
+  categoryGender: CategoryGender!
+}
+
+input CourseInput {
+  name: String!
+  description: String
+  acronym: String!
+  score: Float!
+  level: LevelOfCourse
+  colorPrimary: String!
+  colorSecondary: String!
+  logo: String!
+}
+
+input EditionInput {
+  name: String!
+  description: String
+  startDate: LocalDate!
+  endDate: LocalDate!
+  records: [String]
+}
+
+input RecordInput {
+  description: String!
+  date: LocalDateTime!
+  score: Float!
+  sportId: String!
+  courseId: String!
+  playerId: String
+  teamsId: TeamIdInput
+}
+
+input GameInput {
+  date: LocalDateTime!
+  sportId: String!
+  teamsId: [TeamIdInput]
+  scores: [ScoreInput]
+}
+
+#******* QUERIES ***********#
+
+type Query {
+  users: [User]
+  user(id: ID!): User
+  login(username: String!, password: String!): User
+  findByCpf(cpf: String!): User
+  findByAcademicEmail(academicEmail: String!): User
+  findByPersonalEmail(personalEmail: String!): User
+  findByMatriculation(matriculation: String!): User
+  findByEmail(email: String!): User
+  findByUsername(username: String!): User
+  findAllByName(name: String!): [User]
+  findAllByEmail(email: String!): [User]
+  findAllByCpf(cpf: String!): [User]
+
+  flags: [Flag]
+  flag(id: ID!): Flag
+  findByName(name: String!): [User]
+
+  sports: [Sport]
+  sport(id: ID!): Sport
+  findByCategory(category: String!)
+  findByName(name: String!): [Sport]
+  findByCategoryGender(categoryGender: CategoryGender!): [Sport]
+
+  courses: [Course]
+  course(id: ID!): Course
+  findByName(name: String!): [Course]
+
+  editions: [Edition]
+  edition(id: ID!): Edition
+
+  records: [Record]
+  record(id: ID!): Record
+  findByPlayerFullName(name: String!): [Record]
+  findByPlayerId(id: String!): [Record]
+  findByPlayerUsername(username: String!): [Record]
+
+  games: [Game]
+  game(id: ID!): Game
+}
+
+#******* MUTATIONS ***********#
+
+type Mutation {
+  createUser(userInput: UserInput): User
+  UpdateUser(id: ID!, userInput: UserInput): User
+
+  createFlag(name: String!): Flag
+  updateFlag(id: ID!, name: String!): Flag
+
+  createSport(sportInput: SportInput): Sport
+  updateSport(id: ID!, sportInput: SportInput): Sport
+
+  createCourse(courseInput: CourseInput): Course
+  updateCourse(id: ID!, courseInput: CourseInput): Course
+
+  createEdition(editionInput: EditionInput): Edition
+  updateEdition(id: ID!, editionInput: EditionInput): Edition
+
+  createRecord(recordInput: RecordInput): Record
+  updateRecord(id: ID!, recordInput: RecordInput): Record
+
+  createGame(gameInput: GameInput): Game
+  updateGame(id: ID!, gameInput: GameInput): Game
+}
