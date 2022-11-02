@@ -1,5 +1,6 @@
 package br.ifrn.semadec.repositories;
 
+import java.util.Collection;
 import java.util.UUID;
 import br.ifrn.semadec.entities.record.Record;
 
@@ -50,7 +51,7 @@ public interface RecordRepository extends JpaRepository<Record, UUID> {
             WHERE
                 lower(p.username) LIKE ?1%
             """)
-    Iterable<Record> findByPlayerUsername(String username);
+    Collection<Record> findByPlayerUsername(String username);
 
     @Query("""
             SELECT
@@ -64,6 +65,6 @@ public interface RecordRepository extends JpaRepository<Record, UUID> {
             WHERE
                 lower(p.fullName) LIKE ?1%
             """)
-    Iterable<Record> findByPlayerFullName(String fullName);
+    Collection<Record> findByPlayerFullName(String fullName);
 
 }
