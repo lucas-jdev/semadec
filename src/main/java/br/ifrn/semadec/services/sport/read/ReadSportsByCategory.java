@@ -9,12 +9,12 @@ import br.ifrn.semadec.entities.sport.Sport;
 import br.ifrn.semadec.repositories.SportRepository;
 
 @Service
-public class ReadSportByCategory {
+public class ReadSportsByCategory {
 
     @Autowired
     private static SportRepository sportRepository;
 
-    private ReadSportByCategory() {
+    private ReadSportsByCategory() {
         throw new IllegalStateException("Service class");
     }
 
