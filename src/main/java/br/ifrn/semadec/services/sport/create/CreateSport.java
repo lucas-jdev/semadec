@@ -27,6 +27,8 @@ public class CreateSport {
                 .name(input.getName())
                 .categorySport(input.getCategorySport())
                 .categoryGender(input.getCategoryGender())
+                .minTeams(input.getMinTeams())
+                .maxTeams(input.getMaxTeams())
                 .build();
     }
 
