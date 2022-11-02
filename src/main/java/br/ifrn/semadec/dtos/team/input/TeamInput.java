@@ -10,6 +10,7 @@ import lombok.Data;
 public class TeamInput {
 
     private TeamIdInput teamIdInput;
-    private UUID userId;
+    private Number scoreInstance;
+    private String userId;
 
 }
