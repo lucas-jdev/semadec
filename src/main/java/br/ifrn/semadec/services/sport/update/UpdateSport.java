@@ -31,6 +31,8 @@ public class UpdateSport {
         sport.setName(input.getName());
         sport.setCategorySport(input.getCategorySport());
         sport.setCategoryGender(input.getCategoryGender());
+        sport.setMinTeams(input.getMinTeams());
+        sport.setMaxTeams(input.getMaxTeams());
         return sport;
     }
 }
