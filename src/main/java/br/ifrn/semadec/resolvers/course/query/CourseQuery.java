@@ -13,12 +13,12 @@ import br.ifrn.semadec.services.course.read.ReadCoursesByName;
 @Controller
 public class CourseQuery {
 
-    @QueryMapping
+    @QueryMapping(name = "course")
     public Iterable<Course> findAll() {
         return ReadAllCourses.execute();
     }
 
-    @QueryMapping
+    @QueryMapping(name = "course")
     public Course findById(String id) {
         final var uuid = UUID.fromString(id);
         return ReadCourseById.execute(uuid);

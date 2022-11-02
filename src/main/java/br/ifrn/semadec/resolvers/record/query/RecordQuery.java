@@ -15,13 +15,13 @@ import br.ifrn.semadec.services.record.read.ReadRecordsByPlayerUsername;
 @Controller
 public class RecordQuery {
 
-    @QueryMapping
+    @QueryMapping(name = "record")
     public Record findById(String id) {
         final var uuid = UUID.fromString(id);
         return ReadRecordById.execute(uuid);
     }
 
-    @QueryMapping
+    @QueryMapping(name = "records")
     public Iterable<Record> findAll() {
         return ReadAllRecords.execute();
     }

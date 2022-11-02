@@ -12,13 +12,13 @@ import br.ifrn.semadec.services.game.read.ReadGameById;
 @Controller
 public class GameQuery {
 
-    @QueryMapping
+    @QueryMapping(name = "game")
     public Game findById(String id) {
         final var uuid = UUID.fromString(id);
         return ReadGameById.execute(uuid);
     }
 
-    @QueryMapping
+    @QueryMapping(name = "games")
     public Iterable<Game> findAll() {
         return ReadAllGames.execute();
     }

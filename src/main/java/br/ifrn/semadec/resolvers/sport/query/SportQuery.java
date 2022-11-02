@@ -15,13 +15,13 @@ import br.ifrn.semadec.services.sport.read.ReadSportsByName;
 @Controller
 public class SportQuery {
 
-    @QueryMapping
+    @QueryMapping(name = "sport")
     public Sport findById(String id) {
         final var uuid = UUID.fromString(id);
         return ReadSportById.execute(uuid);
     }
 
-    @QueryMapping
+    @QueryMapping(name = "sports")
     public Iterable<Sport> findAll() {
         return ReadAllSports.execute();
     }

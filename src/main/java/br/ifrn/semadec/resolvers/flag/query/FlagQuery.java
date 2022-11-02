@@ -13,13 +13,13 @@ import br.ifrn.semadec.services.flag.read.ReadFlagsByName;
 @Controller
 public class FlagQuery {
 
-    @QueryMapping
+    @QueryMapping(name = "flag")
     public Flag findById(String id) {
         final var uuid = UUID.fromString(id);
         return ReadFlagById.execute(uuid);
     }
 
-    @QueryMapping
+    @QueryMapping(name = "flags")
     public Iterable<Flag> findAll() {
         return ReadAllFlags.execute();
     }

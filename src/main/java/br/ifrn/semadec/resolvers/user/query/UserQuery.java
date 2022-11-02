@@ -32,7 +32,7 @@ public class UserQuery {
         LoginUser.execute(username, password);
     }
 
-    @QueryMapping
+    @QueryMapping(name = "user")
     public UserOutput findById(final String id) {
         User user = ReadUserById.execute(UUID.fromString(id));
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
@@ -74,7 +74,7 @@ public class UserQuery {
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
-    @QueryMapping
+    @QueryMapping(name = "users")
     public Collection<UserOutput> findAll() {
         List<User> users = ReadAllUsers.execute();
         return _convertInOutput(users);
