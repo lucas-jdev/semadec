@@ -15,5 +15,12 @@ public class UserOutput {
     private String cpf;
     private String academicEmail;
     private String personalEmail;
+    private String gender;
+    private String birthDate;
+    private String status;
+    private String[] flags;
+    private int likes;
+    private byte[] avatar;
+    private String biography;
 
 }
