@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.ifrn.semadec.entities.record.Record;
 import lombok.Builder;
 import lombok.Data;
 
