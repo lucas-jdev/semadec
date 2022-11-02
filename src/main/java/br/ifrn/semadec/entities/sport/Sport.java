@@ -21,6 +21,8 @@ public class Sport {
     private UUID id;
     private String name;
     private String categorySport;
+    private int minTeams;
+    private int maxTeams;
 
     @Enumerated(EnumType.STRING)
     private CategoryGender categoryGender;
