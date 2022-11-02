@@ -13,4 +13,7 @@ public class SportInput {
     private CategoryGender categoryGender;
     private String categorySport;
     private CourseInput courseInput;
+    private int minTeams;
+    private int maxTeams;
+
 }
