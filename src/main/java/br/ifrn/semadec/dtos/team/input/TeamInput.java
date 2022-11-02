@@ -1,7 +1,5 @@
 package br.ifrn.semadec.dtos.team.input;
 
-import java.util.UUID;
-
 import lombok.Builder;
 import lombok.Data;
 
