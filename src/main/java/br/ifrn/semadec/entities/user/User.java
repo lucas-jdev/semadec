@@ -1,5 +1,6 @@
 package br.ifrn.semadec.entities.user;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
@@ -25,7 +26,7 @@ import lombok.Data;
 @Data
 @Builder
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")

@@ -14,27 +14,23 @@ import br.ifrn.semadec.repositories.TeamRepository;
 public class UpdateTeam {
 
     @Autowired
-    private static TeamRepository teamRepository;
+    private TeamRepository teamRepository;
 
-    private UpdateTeam() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Team execute(final TeamId teamId, TeamInput input) {
+    public Team execute(final TeamId teamId, TeamInput input) {
         return teamRepository.findById(teamId)
                 .map(team -> _convertInOutput(team, input))
                 .map(teamRepository::save)
                 .orElseThrow(TeamNotFoundException::new);
     }
 
-    private static Team _convertInOutput(Team team, TeamInput input) {
+    private Team _convertInOutput(Team team, TeamInput input) {
         Score score = _builderScore(input.getScoreInstance());
         team.setScoreInstance(score);
 
         return team;
     }
 
-    private static Score _builderScore(Number number) {
+    private Score _builderScore(Number number) {
         return Score.builder()
                 .number(number)
                 .build();

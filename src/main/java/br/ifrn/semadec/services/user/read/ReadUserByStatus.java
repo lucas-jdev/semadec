@@ -11,13 +11,9 @@ import br.ifrn.semadec.repositories.UserRepository;
 public class ReadUserByStatus {
 
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private ReadUserByStatus() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Iterable<User> execute(final String status) {
+    public Iterable<User> execute(final String status) {
         final var userStatus = UserStatus.valueOf(status);
         return userRepository.findByStatus(userStatus);
     }

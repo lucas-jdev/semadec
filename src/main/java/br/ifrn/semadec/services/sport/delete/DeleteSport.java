@@ -11,13 +11,9 @@ import br.ifrn.semadec.repositories.SportRepository;
 public class DeleteSport {
 
     @Autowired
-    private static SportRepository sportRepository;
+    private SportRepository sportRepository;
 
-    private DeleteSport() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static void execute(final UUID id) {
+    public void execute(final UUID id) {
         sportRepository.deleteById(id);
     }
 

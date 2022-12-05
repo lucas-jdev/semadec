@@ -12,13 +12,9 @@ import br.ifrn.semadec.repositories.UserRepository;
 public class CreateUser {
 
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private CreateUser() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static UserOutput execute(final UserInput input) {
+    public UserOutput execute(final UserInput input) {
         final var user = _createUserWithDTO(input);
 
         final var userSaved = userRepository.save(user);
@@ -28,7 +24,7 @@ public class CreateUser {
         return output;
     }
 
-    private static UserOutput _createOutputWithUserSaved(final User userSaved) {
+    private UserOutput _createOutputWithUserSaved(final User userSaved) {
         return UserOutput.builder()
                 .username(userSaved.getUsername())
                 .fullName(userSaved.getFullName())
@@ -39,7 +35,7 @@ public class CreateUser {
                 .build();
     }
 
-    private static User _createUserWithDTO(final UserInput input) {
+    private User _createUserWithDTO(final UserInput input) {
         return User.builder()
                 .academicEmail(input.getAcademicEmail())
                 .personalEmail(input.getPersonalEmail())

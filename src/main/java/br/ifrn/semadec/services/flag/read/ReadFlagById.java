@@ -13,13 +13,9 @@ import br.ifrn.semadec.repositories.FlagRepository;
 public class ReadFlagById {
 
     @Autowired
-    private static FlagRepository flagRepository;
+    private FlagRepository flagRepository;
 
-    private ReadFlagById() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Flag execute(final UUID id) {
+    public Flag execute(final UUID id) {
         return flagRepository.findById(id)
                 .orElseThrow(FlagNotFoundException::new);
     }

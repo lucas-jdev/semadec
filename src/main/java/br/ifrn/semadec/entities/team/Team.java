@@ -1,5 +1,6 @@
 package br.ifrn.semadec.entities.team;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.EmbeddedId;
@@ -16,7 +17,7 @@ import lombok.Data;
 @Data
 @Builder
 @Table(name = "teams")
-public class Team {
+public class Team implements Serializable {
 
     @EmbeddedId
     private TeamId id;

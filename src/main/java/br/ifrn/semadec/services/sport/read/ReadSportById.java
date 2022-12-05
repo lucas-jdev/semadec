@@ -13,13 +13,9 @@ import br.ifrn.semadec.repositories.SportRepository;
 public class ReadSportById {
 
     @Autowired
-    private static SportRepository sportRepository;
+    private SportRepository sportRepository;
 
-    private ReadSportById() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Sport execute(final UUID id) {
+    public Sport execute(final UUID id) {
         return sportRepository.findById(id)
                 .orElseThrow(SportNotFoundException::new);
     }

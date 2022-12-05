@@ -19,24 +19,20 @@ import br.ifrn.semadec.repositories.TeamRepository;
 public class CreateTeam {
 
     @Autowired
-    private static TeamRepository teamRepository;
+    private TeamRepository teamRepository;
 
     @Autowired
-    private static SportRepository sportRepository;
+    private SportRepository sportRepository;
 
     @Autowired
-    private static CourseRepository courseRepository;
+    private CourseRepository courseRepository;
 
-    private CreateTeam() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Team excute(TeamInput input) {
+    public Team excute(TeamInput input) {
         Team team = _createTeamWithDTO(input);
         return teamRepository.save(team);
     }
 
-    private static Team _createTeamWithDTO(TeamInput input) {
+    private Team _createTeamWithDTO(TeamInput input) {
         Optional<Sport> sportFindedById = sportRepository.findById(input.getTeamIdInput().getSportId());
         Optional<Course> courseFindedById = courseRepository.findById(input.getTeamIdInput().getCourseId());
 
@@ -48,13 +44,13 @@ public class CreateTeam {
         return _builderTeam(sport, course, score);
     }
 
-    private static Score _builderScore(Number number) {
+    private Score _builderScore(Number number) {
         return Score.builder()
                 .number(number)
                 .build();
     }
 
-    private static Team _builderTeam(Sport sport, Course course, Score score) {
+    private Team _builderTeam(Sport sport, Course course, Score score) {
         return Team.builder()
                 .id(TeamId.builder()
                         .sport(sport)

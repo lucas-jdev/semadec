@@ -12,13 +12,9 @@ import br.ifrn.semadec.repositories.GameRepository;
 public class ReadAllGames {
 
     @Autowired
-    private static GameRepository gameRepository;
+    private GameRepository gameRepository;
 
-    private ReadAllGames() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Game> execute() {
+    public Collection<Game> execute() {
         return gameRepository.findAll();
     }
 }

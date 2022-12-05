@@ -14,20 +14,16 @@ import br.ifrn.semadec.repositories.SportRepository;
 public class UpdateSport {
 
     @Autowired
-    private static SportRepository sportRepository;
+    private SportRepository sportRepository;
 
-    private UpdateSport() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Sport execute(final UUID id, final SportInput input) {
+    public Sport execute(final UUID id, final SportInput input) {
         return sportRepository.findById(id)
                 .map(sport -> _updateSportWithDTO(sport, input))
                 .map(sportRepository::save)
                 .orElseThrow(SportNotFoundException::new);
     }
 
-    private static Sport _updateSportWithDTO(Sport sport, SportInput input) {
+    private Sport _updateSportWithDTO(Sport sport, SportInput input) {
         sport.setName(input.getName());
         sport.setCategorySport(input.getCategorySport());
         sport.setCategoryGender(input.getCategoryGender());

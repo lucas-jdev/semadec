@@ -10,13 +10,9 @@ import br.ifrn.semadec.repositories.UserRepository;
 @Service
 public class ReadAllUsers {
 
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private ReadAllUsers() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static List<User> execute() {
+    public List<User> execute() {
         return userRepository.findAll();
     }
 

@@ -12,13 +12,9 @@ import br.ifrn.semadec.repositories.EditionRepository;
 public class ReadAllEditions {
 
     @Autowired
-    private static EditionRepository editionRepository;
+    private EditionRepository editionRepository;
 
-    private ReadAllEditions() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Edition> execute() {
+    public Collection<Edition> execute() {
         return editionRepository.findAll();
     }
 

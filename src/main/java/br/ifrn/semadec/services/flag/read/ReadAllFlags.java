@@ -12,13 +12,9 @@ import br.ifrn.semadec.repositories.FlagRepository;
 public class ReadAllFlags {
 
     @Autowired
-    private static FlagRepository flagRepository;
+    private FlagRepository flagRepository;
 
-    private ReadAllFlags() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Flag> execute() {
+    public Collection<Flag> execute() {
         return flagRepository.findAll();
     }
 

@@ -10,13 +10,9 @@ import br.ifrn.semadec.repositories.TeamRepository;
 public class DeleteTeam {
 
     @Autowired
-    private static TeamRepository teamRepository;
+    private TeamRepository teamRepository;
 
-    private DeleteTeam() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static void execute(final TeamId teamId) {
+    public void execute(final TeamId teamId) {
         teamRepository.deleteById(teamId);
     }
 

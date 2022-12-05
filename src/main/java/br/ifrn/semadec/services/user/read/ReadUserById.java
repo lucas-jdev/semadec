@@ -13,13 +13,9 @@ import java.util.UUID;
 public class ReadUserById {
 
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
-    protected ReadUserById() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static User execute(UUID id) {
+    public User execute(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(UserNotFoundException::new);
     }

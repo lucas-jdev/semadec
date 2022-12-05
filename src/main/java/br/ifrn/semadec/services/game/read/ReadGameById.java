@@ -13,13 +13,9 @@ import br.ifrn.semadec.repositories.GameRepository;
 public class ReadGameById {
 
     @Autowired
-    private static GameRepository gameRepository;
+    private GameRepository gameRepository;
 
-    private ReadGameById() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Game execute(UUID id) {
+    public Game execute(UUID id) {
         return gameRepository.findById(id)
                 .orElseThrow(GameNotFoundException::new);
     }

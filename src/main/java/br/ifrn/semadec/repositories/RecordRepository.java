@@ -46,10 +46,14 @@ public interface RecordRepository extends JpaRepository<Record, UUID> {
                 Record r
             INNER JOIN
                 r.player p
+            INNER JOIN
+                User u
             ON
                 r.player = p
+                AND
+                p.user = u
             WHERE
-                lower(p.username) LIKE ?1%
+                lower(u.username) LIKE ?1%
             """)
     Collection<Record> findByPlayerUsername(String username);
 
@@ -60,10 +64,14 @@ public interface RecordRepository extends JpaRepository<Record, UUID> {
                 Record r
             INNER JOIN
                 r.player p
+            INNER JOIN
+                User u
             ON
                 r.player = p
+                AND
+                p.user = u
             WHERE
-                lower(p.fullName) LIKE ?1%
+                lower(u.fullName) LIKE ?1%
             """)
     Collection<Record> findByPlayerFullName(String fullName);
 

@@ -13,13 +13,9 @@ import br.ifrn.semadec.repositories.RecordRepository;
 public class ReadRecordsByPlayerFullName {
 
     @Autowired
-    private static RecordRepository recordRepository;
+    private RecordRepository recordRepository;
 
-    private ReadRecordsByPlayerFullName() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Record> execute(String fullName) {
+    public Collection<Record> execute(String fullName) {
         return recordRepository.findByPlayerFullName(fullName);
     }
 

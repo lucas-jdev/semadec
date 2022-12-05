@@ -1,14 +1,14 @@
 package br.ifrn.semadec.repositories;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.ifrn.semadec.entities.team.Player;
-import br.ifrn.semadec.entities.user.User;
 
-public interface PlayerRepository extends JpaRepository<Player, User> {
+public interface PlayerRepository extends JpaRepository<Player, UUID> {
 
     @Query("""
             SELECT p
@@ -16,6 +16,6 @@ public interface PlayerRepository extends JpaRepository<Player, User> {
             JOIN p.user u
             WHERE u.id = :id
                 """)
-    Player findById(UUID id);
+    Optional<Player> findById(UUID id);
 
 }

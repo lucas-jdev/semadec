@@ -13,13 +13,9 @@ import br.ifrn.semadec.repositories.EditionRepository;
 public class ReadEditionById {
 
     @Autowired
-    private static EditionRepository editionRepository;
+    private EditionRepository editionRepository;
 
-    private ReadEditionById() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Edition execute(UUID id) {
+    public Edition execute(UUID id) {
         return editionRepository.findById(id)
                 .orElseThrow(EditionNotFoundException::new);
     }

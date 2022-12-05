@@ -10,13 +10,9 @@ import br.ifrn.semadec.repositories.UserRepository;
 public class ReadUserByUsername {
 
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private ReadUserByUsername() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static User execute(final String username) {
+    public User execute(final String username) {
         return userRepository.findByUsername(username);
     }
 

@@ -13,13 +13,9 @@ import br.ifrn.semadec.repositories.RecordRepository;
 public class ReadRecordsByPlayerUsername {
 
     @Autowired
-    private static RecordRepository recordRepository;
+    private RecordRepository recordRepository;
 
-    private ReadRecordsByPlayerUsername() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Record> execute(String username) {
+    public Collection<Record> execute(String username) {
         final var usernameFormatted = username.toLowerCase();
         return recordRepository.findByPlayerUsername(usernameFormatted);
     }

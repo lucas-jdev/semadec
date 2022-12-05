@@ -13,13 +13,9 @@ import br.ifrn.semadec.repositories.UserRepository;
 public class DeleteUser {
 
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private DeleteUser() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static void execute(final UUID id) {
+    public void execute(final UUID id) {
         Optional<User> findById = userRepository.findById(id);
         findById.ifPresent(User::inactive);
         findById.ifPresent(userRepository::save);

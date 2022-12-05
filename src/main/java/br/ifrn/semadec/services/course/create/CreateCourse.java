@@ -12,18 +12,14 @@ import br.ifrn.semadec.repositories.CourseRepository;
 public class CreateCourse {
 
     @Autowired
-    private static CourseRepository courseRepository;
+    private CourseRepository courseRepository;
 
-    private CreateCourse() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Course execute(final CourseInput input) {
+    public Course execute(final CourseInput input) {
         Course course = _createCourseWithDTO(input);
         return courseRepository.save(course);
     }
 
-    public static Course _createCourseWithDTO(CourseInput input) {
+    public Course _createCourseWithDTO(CourseInput input) {
         return Course.builder()
                 .name(input.getName())
                 .colorPrimary(input.getColorPrimary())

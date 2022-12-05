@@ -13,14 +13,10 @@ import br.ifrn.semadec.repositories.SportRepository;
 public class ReadSportsByCategoryGender {
 
     @Autowired
-    private static SportRepository sportRepository;
+    private SportRepository sportRepository;
 
-    private ReadSportsByCategoryGender() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Sport> execute(final String category) {
+    public Collection<Sport> execute(final String category) {
         return sportRepository.findByCategoryGender(CategoryGender.valueOf(category.toUpperCase()));
     }
-    
+
 }

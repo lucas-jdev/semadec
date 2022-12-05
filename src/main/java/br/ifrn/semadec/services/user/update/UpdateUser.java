@@ -14,13 +14,9 @@ import br.ifrn.semadec.repositories.UserRepository;
 public class UpdateUser {
 
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private UpdateUser() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static User execute(final UUID userId, final UserInput input) {
+    public User execute(final UUID userId, final UserInput input) {
         return userRepository.findById(userId).map(user -> {
             user.setUsername(input.getUsername());
             user.setFullName(input.getFullName());

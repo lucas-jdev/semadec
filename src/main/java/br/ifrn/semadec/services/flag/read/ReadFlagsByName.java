@@ -12,13 +12,9 @@ import br.ifrn.semadec.repositories.FlagRepository;
 public class ReadFlagsByName {
 
     @Autowired
-    private static FlagRepository flagRepository;
+    private FlagRepository flagRepository;
 
-    private ReadFlagsByName() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Flag> execute(final String name) {
+    public Collection<Flag> execute(final String name) {
         return flagRepository.findByName(name);
     }
 }

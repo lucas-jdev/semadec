@@ -11,13 +11,9 @@ import br.ifrn.semadec.repositories.EditionRepository;
 public class DeleteEdition {
 
     @Autowired
-    private static EditionRepository editionRepository;
+    private EditionRepository editionRepository;
 
-    private DeleteEdition() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static void execute(UUID id) {
+    public void execute(UUID id) {
         editionRepository.deleteById(id);
     }
 

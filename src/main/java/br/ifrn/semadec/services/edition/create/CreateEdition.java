@@ -18,21 +18,17 @@ import br.ifrn.semadec.repositories.RecordRepository;
 public class CreateEdition {
 
     @Autowired
-    private static EditionRepository editionRepository;
+    private EditionRepository editionRepository;
 
     @Autowired
-    private static RecordRepository recordRepository;
+    private RecordRepository recordRepository;
 
-    private CreateEdition() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static void execute(EditionInput input) {
+    public void execute(EditionInput input) {
         final Edition edition = _createEditionWithDTO(input);
         editionRepository.save(edition);
     }
 
-    private static Edition _createEditionWithDTO(EditionInput input) {
+    private Edition _createEditionWithDTO(EditionInput input) {
         LocalDate startDate = LocalDate.parse(input.getStartDate());
         LocalDate endDate = LocalDate.parse(input.getEndDate());
 
@@ -46,7 +42,7 @@ public class CreateEdition {
                 .build();
     }
 
-    private static Set<Record> _getRecords(EditionInput input) {
+    private Set<Record> _getRecords(EditionInput input) {
         return input.getRecords()
                 .stream()
                 .map(id -> {

@@ -12,13 +12,9 @@ import br.ifrn.semadec.repositories.CourseRepository;
 public class ReadAllCourses {
 
     @Autowired
-    private static CourseRepository courseRepository;
+    private CourseRepository courseRepository;
 
-    private ReadAllCourses() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Course> execute() {
+    public Collection<Course> execute() {
         return courseRepository.findAll();
     }
 

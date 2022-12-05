@@ -2,6 +2,7 @@ package br.ifrn.semadec.resolvers.flag.query;
 
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -13,20 +14,29 @@ import br.ifrn.semadec.services.flag.read.ReadFlagsByName;
 @Controller
 public class FlagQuery {
 
+    @Autowired
+    private ReadAllFlags readAllFlags;
+
+    @Autowired
+    private ReadFlagById readFlagById;
+
+    @Autowired
+    private ReadFlagsByName readFlagsByName;
+
     @QueryMapping(name = "flag")
     public Flag findById(String id) {
         final var uuid = UUID.fromString(id);
-        return ReadFlagById.execute(uuid);
+        return readFlagById.execute(uuid);
     }
 
     @QueryMapping(name = "flags")
     public Iterable<Flag> findAll() {
-        return ReadAllFlags.execute();
+        return readAllFlags.execute();
     }
 
     @QueryMapping
     public Iterable<Flag> findByName(String name) {
-        return ReadFlagsByName.execute(name);
+        return readFlagsByName.execute(name);
     }
 
 }

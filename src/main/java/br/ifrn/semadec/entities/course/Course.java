@@ -1,5 +1,6 @@
 package br.ifrn.semadec.entities.course;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import lombok.Data;
 @Entity
 @Data
 @Builder
-public class Course {
+public class Course implements Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")

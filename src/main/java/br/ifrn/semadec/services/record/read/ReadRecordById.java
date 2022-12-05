@@ -13,13 +13,9 @@ import br.ifrn.semadec.repositories.RecordRepository;
 public class ReadRecordById {
 
     @Autowired
-    private static RecordRepository recordRepository;
+    private RecordRepository recordRepository;
 
-    private ReadRecordById() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Record execute(UUID id) {
+    public Record execute(UUID id) {
         return recordRepository.findById(id)
                 .orElseThrow(RecordNotFoundException::new);
     }

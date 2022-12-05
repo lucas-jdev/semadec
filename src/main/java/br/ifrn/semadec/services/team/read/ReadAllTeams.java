@@ -12,13 +12,9 @@ import br.ifrn.semadec.repositories.TeamRepository;
 public class ReadAllTeams {
 
     @Autowired
-    private static TeamRepository teamRepository;
+    private TeamRepository teamRepository;
 
-    private ReadAllTeams() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Team> execute() {
+    public Collection<Team> execute() {
         return teamRepository.findAll();
     }
 

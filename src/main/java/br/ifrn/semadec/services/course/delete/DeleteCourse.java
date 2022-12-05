@@ -11,13 +11,9 @@ import br.ifrn.semadec.repositories.CourseRepository;
 public class DeleteCourse {
 
     @Autowired
-    private static CourseRepository courseRepository;
+    private CourseRepository courseRepository;
 
-    private DeleteCourse() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static void execute(final UUID id) {
+    public void execute(final UUID id) {
         courseRepository.deleteById(id);
     }
 

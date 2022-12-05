@@ -11,13 +11,9 @@ import br.ifrn.semadec.repositories.FlagRepository;
 public class DeleteFlag {
 
     @Autowired
-    private static FlagRepository flagRepository;
+    private FlagRepository flagRepository;
 
-    private DeleteFlag() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static void execute(final UUID id) {
+    public void execute(final UUID id) {
         flagRepository.deleteById(id);
     }
 

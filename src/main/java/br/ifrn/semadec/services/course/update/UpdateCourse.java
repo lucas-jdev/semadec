@@ -15,20 +15,16 @@ import br.ifrn.semadec.repositories.CourseRepository;
 public class UpdateCourse {
 
     @Autowired
-    private static CourseRepository courseRepository;
+    private CourseRepository courseRepository;
 
-    private UpdateCourse() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Course execute(final UUID id, final CourseInput input) {
+    public Course execute(final UUID id, final CourseInput input) {
         return courseRepository.findById(id)
                 .map(c -> _updateCourseWithDTO(c, input))
                 .map(courseRepository::save)
                 .orElseThrow(CourseNotFoundException::new);
     }
 
-    private static Course _updateCourseWithDTO(Course course, CourseInput input) {
+    private Course _updateCourseWithDTO(Course course, CourseInput input) {
         course.setName(input.getName());
         course.setColorPrimary(input.getColorPrimary());
         course.setColorSecondary(input.getColorSecondary());

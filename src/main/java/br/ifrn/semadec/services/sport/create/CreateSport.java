@@ -11,18 +11,14 @@ import br.ifrn.semadec.repositories.SportRepository;
 public class CreateSport {
 
     @Autowired
-    private static SportRepository sportRepository;
+    private SportRepository sportRepository;
 
-    private CreateSport() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Sport execute(final SportInput input) {
+    public Sport execute(final SportInput input) {
         final Sport sport = _createSportWithDTO(input);
         return sportRepository.save(sport);
     }
 
-    public static Sport _createSportWithDTO(SportInput input) {
+    public Sport _createSportWithDTO(SportInput input) {
         return Sport.builder()
                 .name(input.getName())
                 .categorySport(input.getCategorySport())

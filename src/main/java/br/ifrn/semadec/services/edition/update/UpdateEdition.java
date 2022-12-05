@@ -19,16 +19,12 @@ import br.ifrn.semadec.repositories.RecordRepository;
 public class UpdateEdition {
 
     @Autowired
-    private static EditionRepository editionRepository;
+    private EditionRepository editionRepository;
 
     @Autowired
-    private static RecordRepository recordRepository;
+    private RecordRepository recordRepository;
 
-    private UpdateEdition() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static void execute(UUID id, EditionInput editionInput) {
+    public void execute(UUID id, EditionInput editionInput) {
         Edition edition = editionRepository.findById(id)
                 .orElseThrow(EditionNotFoundException::new);
 
@@ -43,7 +39,7 @@ public class UpdateEdition {
         editionRepository.save(edition);
     }
 
-    private static Set<Record> _getRecords(EditionInput editionInput) {
+    private Set<Record> _getRecords(EditionInput editionInput) {
         return editionInput.getRecords().stream().map(recordId -> {
             UUID uuid = UUID.fromString(recordId);
             return recordRepository.findById(uuid).get();

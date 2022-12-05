@@ -12,13 +12,9 @@ import br.ifrn.semadec.repositories.UserRepository;
 public class ReadUsersByFullName {
 
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private ReadUsersByFullName() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<User> execute(final String fullName) {
+    public Collection<User> execute(final String fullName) {
         return userRepository.findByFullName(fullName);
     }
 

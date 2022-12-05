@@ -1,5 +1,6 @@
 package br.ifrn.semadec.entities.sport;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import lombok.Data;
 @Entity
 @Data
 @Builder
-public class Sport {
+public class Sport implements Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")

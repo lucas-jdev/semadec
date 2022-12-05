@@ -12,13 +12,9 @@ import br.ifrn.semadec.repositories.SportRepository;
 public class ReadSportsByCategory {
 
     @Autowired
-    private static SportRepository sportRepository;
+    private SportRepository sportRepository;
 
-    private ReadSportsByCategory() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Sport> execute(final String category) {
+    public Collection<Sport> execute(final String category) {
         return sportRepository.findByCategory(category.toLowerCase());
     }
 

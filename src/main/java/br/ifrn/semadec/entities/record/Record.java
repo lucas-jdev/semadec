@@ -1,5 +1,6 @@
 package br.ifrn.semadec.entities.record;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ import lombok.Data;
 @Data
 @Builder
 @Table(name = "records")
-public class Record {
+public class Record implements Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -61,12 +62,10 @@ public class Record {
     @Column(columnDefinition = "timestamp")
     private LocalDateTime date;
 
-    @OneToOne
-    @Column(nullable = false)
+    @OneToOne(optional = false)
     private Sport sport;
 
-    @OneToOne
-    @Column(nullable = false)
+    @OneToOne(optional = false)
     private Course course;
 
     @OneToOne

@@ -12,13 +12,9 @@ import br.ifrn.semadec.repositories.UserRepository;
 public class ReadUsersByCpf {
 
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private ReadUsersByCpf() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<User> execute(final String cpf) {
+    public Collection<User> execute(final String cpf) {
         return userRepository.findAllByCpf(cpf);
     }
 

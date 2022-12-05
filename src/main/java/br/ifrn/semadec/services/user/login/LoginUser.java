@@ -11,13 +11,9 @@ import br.ifrn.semadec.repositories.UserRepository;
 public class LoginUser {
 
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private LoginUser() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static void execute(final String username, final String password) {
+    public void execute(final String username, final String password) {
         final var user = username.toLowerCase().trim();
         final var pass = password.trim();
         final User userFound;
@@ -25,7 +21,7 @@ public class LoginUser {
         _validateUser(userFound);
     }
 
-    private static void _validateUser(final User userFound) {
+    private void _validateUser(final User userFound) {
         boolean userNotFound = userFound == null;
         if (userNotFound) {
             throw new UserNotFoundException();

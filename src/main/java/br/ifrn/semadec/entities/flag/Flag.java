@@ -1,5 +1,6 @@
 package br.ifrn.semadec.entities.flag;
 
+import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ import lombok.Data;
 @Entity
 @Data
 @Builder
-public class Flag {
+public class Flag implements Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")

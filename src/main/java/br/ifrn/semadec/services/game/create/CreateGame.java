@@ -24,57 +24,53 @@ import br.ifrn.semadec.repositories.TeamRepository;
 @Service
 public class CreateGame {
 
-    @Autowired
-    private static GameRepository gameRepository;
+        @Autowired
+        private GameRepository gameRepository;
 
-    @Autowired
-    private static TeamRepository teamRepository;
+        @Autowired
+        private TeamRepository teamRepository;
 
-    @Autowired
-    private static SportRepository sportRepository;
+        @Autowired
+        private SportRepository sportRepository;
 
-    @Autowired
-    private static CourseRepository courseRepository;
+        @Autowired
+        private CourseRepository courseRepository;
 
-    private CreateGame() {
-        throw new IllegalStateException("Service class");
-    }
+        public Game execute(GameInput input) {
+                final Game game = _createGameWithDTO(input);
+                return gameRepository.save(game);
+        }
 
-    public static Game execute(GameInput input) {
-        final Game game = _createGameWithDTO(input);
-        return gameRepository.save(game);
-    }
+        private Game _createGameWithDTO(GameInput input) {
 
-    private static Game _createGameWithDTO(GameInput input) {
+                UUID sportId = UUID.fromString(input.getSportId());
+                Sport sport = sportRepository.findById(sportId)
+                                .orElseThrow(SportNotFoundException::new);
 
-        UUID sportId = UUID.fromString(input.getSportId());
-        Sport sport = sportRepository.findById(sportId)
-                .orElseThrow(SportNotFoundException::new);
+                List<TeamId> teamsId = input.getTeamsId()
+                                .stream()
+                                .map(teamIdInput -> _createTeamIdByDTO(teamIdInput))
+                                .toList();
 
-        List<TeamId> teamsId = input.getTeamsId()
-                .stream()
-                .map(teamIdInput -> _createTeamIdByDTO(teamIdInput))
-                .toList();
+                List<Team> teams = teamRepository.findAllById(teamsId);
 
-        List<Team> teams = teamRepository.findAllById(teamsId);
+                return Game.builder()
+                                .teams(teams)
+                                .date(LocalDateTime.parse(input.getDate()))
+                                .sport(sport)
+                                .build();
+        }
 
-        return Game.builder()
-                .teams(teams)
-                .date(LocalDateTime.parse(input.getDate()))
-                .sport(sport)
-                .build();
-    }
+        private TeamId _createTeamIdByDTO(TeamIdInput input) {
+                Sport sport = sportRepository.findById(input.getSportId())
+                                .orElseThrow(SportNotFoundException::new);
 
-    private static TeamId _createTeamIdByDTO(TeamIdInput input) {
-        Sport sport = sportRepository.findById(input.getSportId())
-                .orElseThrow(SportNotFoundException::new);
+                Course course = courseRepository.findById(input.getCourseId())
+                                .orElseThrow(CourseNotFoundException::new);
 
-        Course course = courseRepository.findById(input.getCourseId())
-                .orElseThrow(CourseNotFoundException::new);
-
-        return TeamId.builder()
-                .sport(sport)
-                .course(course)
-                .build();
-    }
+                return TeamId.builder()
+                                .sport(sport)
+                                .course(course)
+                                .build();
+        }
 }

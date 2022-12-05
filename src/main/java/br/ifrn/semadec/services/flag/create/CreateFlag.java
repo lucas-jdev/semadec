@@ -10,13 +10,9 @@ import br.ifrn.semadec.repositories.FlagRepository;
 public class CreateFlag {
 
     @Autowired
-    private static FlagRepository flagRepository;
+    private FlagRepository flagRepository;
 
-    private CreateFlag() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Flag execute(String name) {
+    public Flag execute(String name) {
         Flag flag = Flag.builder().name(name).build();
 
         return flagRepository.save(flag);

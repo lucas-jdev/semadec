@@ -17,19 +17,15 @@ import br.ifrn.semadec.repositories.TeamRepository;
 public class ReadTeamById {
 
     @Autowired
-    private static TeamRepository teamRepository;
+    private TeamRepository teamRepository;
 
     @Autowired
-    private static SportRepository sportRepository;
+    private SportRepository sportRepository;
 
     @Autowired
-    private static CourseRepository courseRepository;
+    private CourseRepository courseRepository;
 
-    private ReadTeamById() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Team execute(TeamIdInput teamIdInput) {
+    public Team execute(TeamIdInput teamIdInput) {
         Sport sport = sportRepository.findById(teamIdInput.getSportId())
                 .orElseThrow();
         Course course = courseRepository.findById(teamIdInput.getCourseId())
@@ -39,7 +35,7 @@ public class ReadTeamById {
                 .orElseThrow(TeamNotFoundException::new);
     }
 
-    private static TeamId _builderTeamId(Sport sport, Course course) {
+    private TeamId _builderTeamId(Sport sport, Course course) {
         return TeamId.builder()
                 .sport(sport)
                 .course(course)

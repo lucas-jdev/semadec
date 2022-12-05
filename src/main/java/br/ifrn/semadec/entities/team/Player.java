@@ -1,7 +1,14 @@
 package br.ifrn.semadec.entities.team;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -13,10 +20,11 @@ import lombok.Data;
 @Data
 @Builder
 @Table(name = "players")
-public class Player {
+public class Player implements Serializable {
 
     @Id
     @OneToOne
+    @MapsId
     private User user;
 
     private Number score;

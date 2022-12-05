@@ -11,13 +11,9 @@ import br.ifrn.semadec.repositories.GameRepository;
 public class DeleteGame {
 
     @Autowired
-    private static GameRepository gameRepository;
+    private GameRepository gameRepository;
 
-    private DeleteGame() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static void execute(UUID id) {
+    public void execute(UUID id) {
         gameRepository.deleteById(id);
     }
 }

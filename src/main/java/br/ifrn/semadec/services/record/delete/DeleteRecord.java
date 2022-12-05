@@ -11,13 +11,13 @@ import br.ifrn.semadec.repositories.RecordRepository;
 public class DeleteRecord {
 
     @Autowired
-    private static RecordRepository recordRepository;
+    private RecordRepository recordRepository;
 
     private DeleteRecord() {
         throw new IllegalStateException("Service class");
     }
 
-    public static void execute(UUID id) {
+    public void execute(UUID id) {
         recordRepository.deleteById(id);
     }
 

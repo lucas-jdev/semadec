@@ -24,25 +24,21 @@ import br.ifrn.semadec.repositories.TeamRepository;
 public class CreateRecord {
 
     @Autowired
-    private static RecordRepository recordRepository;
+    private RecordRepository recordRepository;
 
     @Autowired
-    private static TeamRepository teamRepository;
+    private TeamRepository teamRepository;
 
     @Autowired
-    private static SportRepository sportRepository;
+    private SportRepository sportRepository;
 
     @Autowired
-    private static CourseRepository courseRepository;
+    private CourseRepository courseRepository;
 
     @Autowired
-    private static PlayerRepository playerRepository;
+    private PlayerRepository playerRepository;
 
-    private CreateRecord() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Record execute(RecordInput input) {
+    public Record execute(RecordInput input) {
         final var teamIdInputOptional = Optional.ofNullable(input.getTeamId());
         TeamId teamId = teamIdInputOptional.map(teamIdInput -> {
             return _builderTeamId(teamIdInput);
@@ -52,7 +48,7 @@ public class CreateRecord {
         return recordRepository.save(_builderRecord(input, teamFound));
     }
 
-    private static TeamId _builderTeamId(final TeamIdInput teamIdInput) {
+    private TeamId _builderTeamId(final TeamIdInput teamIdInput) {
         final UUID sportId = teamIdInput.getSportId();
         final UUID courseId = teamIdInput.getCourseId();
 
@@ -65,13 +61,13 @@ public class CreateRecord {
                 .build();
     }
 
-    private static Record _builderRecord(final RecordInput input, final Team team) {
+    private Record _builderRecord(final RecordInput input, final Team team) {
         final var sportId = UUID.fromString(input.getSportId());
         final var playerId = UUID.fromString(input.getPlayerId());
         final var courseId = UUID.fromString(input.getCourseId());
 
         final Sport sport = sportRepository.findById(sportId).orElseThrow();
-        final Player player = playerRepository.findById(playerId);
+        final Player player = playerRepository.findById(playerId).orElseThrow();
         final Course course = courseRepository.findById(courseId).orElseThrow();
 
         return Record.builder()

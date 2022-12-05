@@ -2,6 +2,7 @@ package br.ifrn.semadec.resolvers.sport.query;
 
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -15,30 +16,45 @@ import br.ifrn.semadec.services.sport.read.ReadSportsByName;
 @Controller
 public class SportQuery {
 
+    @Autowired
+    private ReadAllSports readAllSports;
+
+    @Autowired
+    private ReadSportById readSportById;
+
+    @Autowired
+    private ReadSportsByCategory readSportsByCategory;
+
+    @Autowired
+    private ReadSportsByName readSportsByName;
+
+    @Autowired
+    private ReadSportsByCategoryGender readSportsByCategoryGender;
+
     @QueryMapping(name = "sport")
     public Sport findById(String id) {
         final var uuid = UUID.fromString(id);
-        return ReadSportById.execute(uuid);
+        return readSportById.execute(uuid);
     }
 
     @QueryMapping(name = "sports")
     public Iterable<Sport> findAll() {
-        return ReadAllSports.execute();
+        return readAllSports.execute();
     }
 
     @QueryMapping
     public Iterable<Sport> findByCategory(String category) {
-        return ReadSportsByCategory.execute(category);
+        return readSportsByCategory.execute(category);
     }
 
     @QueryMapping
     public Iterable<Sport> findByName(String name) {
-        return ReadSportsByName.execute(name);
+        return readSportsByName.execute(name);
     }
 
     @QueryMapping
     public Iterable<Sport> findByCategoryGender(String categoryGender) {
-        return ReadSportsByCategoryGender.execute(categoryGender);
+        return readSportsByCategoryGender.execute(categoryGender);
     }
 
 }

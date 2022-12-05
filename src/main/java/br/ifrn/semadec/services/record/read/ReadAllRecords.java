@@ -13,13 +13,9 @@ import br.ifrn.semadec.repositories.RecordRepository;
 public class ReadAllRecords {
 
     @Autowired
-    private static RecordRepository recordRepository;
+    private RecordRepository recordRepository;
 
-    private ReadAllRecords() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Collection<Record> execute() {
+    public Collection<Record> execute() {
         return recordRepository.findAll();
     }
 

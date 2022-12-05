@@ -26,24 +26,20 @@ import br.ifrn.semadec.repositories.TeamRepository;
 public class UpdateRecord {
 
     @Autowired
-    private static RecordRepository recordRepository;
+    private RecordRepository recordRepository;
 
     @Autowired
-    private static SportRepository sportRepository;
+    private SportRepository sportRepository;
 
-    private static PlayerRepository playerRepository;
-
-    @Autowired
-    private static TeamRepository teamRepository;
+    private PlayerRepository playerRepository;
 
     @Autowired
-    private static CourseRepository courseRepository;
+    private TeamRepository teamRepository;
 
-    private UpdateRecord() {
-        throw new IllegalStateException("Service class");
-    }
+    @Autowired
+    private CourseRepository courseRepository;
 
-    public static Record execute(UUID id, RecordInput input) {
+    public Record execute(UUID id, RecordInput input) {
         final Record recordFound = recordRepository.findById(id)
                 .orElseThrow(RecordNotFoundException::new);
 
@@ -53,7 +49,7 @@ public class UpdateRecord {
 
     }
 
-    private static Team _buildTeamByInput(RecordInput input) {
+    private Team _buildTeamByInput(RecordInput input) {
         final var teamIdInputOptional = Optional.ofNullable(input.getTeamId());
         TeamId teamId = teamIdInputOptional.map(teamIdInput -> {
             return _builderTeamId(teamIdInput);
@@ -61,7 +57,7 @@ public class UpdateRecord {
         return teamRepository.findById(teamId).orElseThrow();
     }
 
-    private static TeamId _builderTeamId(final TeamIdInput teamIdInput) {
+    private TeamId _builderTeamId(final TeamIdInput teamIdInput) {
         final UUID sportId = teamIdInput.getSportId();
         final UUID courseId = teamIdInput.getCourseId();
 
@@ -74,13 +70,13 @@ public class UpdateRecord {
                 .build();
     }
 
-    private static Record _builderRecord(final Record recordFound, final RecordInput input) {
+    private Record _builderRecord(final Record recordFound, final RecordInput input) {
         final var sportId = UUID.fromString(input.getSportId());
         final var playerId = UUID.fromString(input.getPlayerId());
         final var courseId = UUID.fromString(input.getCourseId());
 
         final Sport sport = sportRepository.findById(sportId).orElseThrow();
-        final Player player = playerRepository.findById(playerId);
+        final Player player = playerRepository.findById(playerId).orElseThrow();
         final Course course = courseRepository.findById(courseId).orElseThrow();
         final Team team = _buildTeamByInput(input);
 

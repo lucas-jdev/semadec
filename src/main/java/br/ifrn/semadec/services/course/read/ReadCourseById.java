@@ -13,13 +13,9 @@ import br.ifrn.semadec.repositories.CourseRepository;
 public class ReadCourseById {
 
     @Autowired
-    private static CourseRepository courseRepository;
+    private CourseRepository courseRepository;
 
-    private ReadCourseById() {
-        throw new IllegalStateException("Service class");
-    }
-
-    public static Course execute(final UUID id) {
+    public Course execute(final UUID id) {
         return courseRepository.findById(id)
                 .orElseThrow(CourseNotFoundException::new);
     }

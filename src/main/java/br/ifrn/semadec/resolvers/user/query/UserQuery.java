@@ -3,6 +3,7 @@ package br.ifrn.semadec.resolvers.user.query;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -27,74 +28,110 @@ import java.util.UUID;
 @Controller
 public class UserQuery {
 
+    @Autowired
+    private ReadAllUsers readAllUsers;
+
+    @Autowired
+    private ReadUserByMatriculation readUserByMatriculation;
+
+    @Autowired
+    private ReadUserByAcademicEmail readUserByAcademicEmail;
+
+    @Autowired
+    private ReadUserByPersonalEmail readUserByPersonalEmail;
+
+    @Autowired
+    private ReadUserByUsername readUserByUsername;
+
+    @Autowired
+    private ReadUserByCpf readUserByCpf;
+
+    @Autowired
+    private ReadUserByEmail readUserByEmail;
+
+    @Autowired
+    private ReadUserById readUserById;
+
+    @Autowired
+    private ReadUsersByFullName readUsersByFullName;
+
+    @Autowired
+    private ReadUsersByCpf readUsersByCpf;
+
+    @Autowired
+    private ReadUsersByEmail readUsersByEmail;
+
+    @Autowired
+    private LoginUser loginUser;
+
     @QueryMapping
     public void login(final String username, final String password) {
-        LoginUser.execute(username, password);
+        loginUser.execute(username, password);
     }
 
     @QueryMapping(name = "user")
     public UserOutput findById(final String id) {
-        User user = ReadUserById.execute(UUID.fromString(id));
+        User user = readUserById.execute(UUID.fromString(id));
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
     public UserOutput findByEmail(final String email) {
-        User user = ReadUserByEmail.execute(email);
+        User user = readUserByEmail.execute(email);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
     public UserOutput findByCpf(final String cpf) {
-        User user = ReadUserByCpf.execute(cpf);
+        User user = readUserByCpf.execute(cpf);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
     public UserOutput findByAcademicEmail(final String academicEmail) {
-        User user = ReadUserByAcademicEmail.execute(academicEmail);
+        User user = readUserByAcademicEmail.execute(academicEmail);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
     public UserOutput findByPersonalEmail(final String personalEmail) {
-        User user = ReadUserByPersonalEmail.execute(personalEmail);
+        User user = readUserByPersonalEmail.execute(personalEmail);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
     public UserOutput findByMatriculation(final String matriculation) {
-        User user = ReadUserByMatriculation.execute(matriculation);
+        User user = readUserByMatriculation.execute(matriculation);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
     public UserOutput findByUsername(final String username) {
-        User user = ReadUserByUsername.execute(username);
+        User user = readUserByUsername.execute(username);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping(name = "users")
     public Collection<UserOutput> findAll() {
-        List<User> users = ReadAllUsers.execute();
+        List<User> users = readAllUsers.execute();
         return _convertInOutput(users);
     }
 
     @QueryMapping
     public Collection<UserOutput> findAllByName(String name) {
-        Collection<User> users = ReadUsersByFullName.execute(name);
+        Collection<User> users = readUsersByFullName.execute(name);
         return _convertInOutput(users);
     }
 
     @QueryMapping
     public Collection<UserOutput> findAllByEmail(String email) {
-        Collection<User> users = ReadUsersByEmail.execute(email);
+        Collection<User> users = readUsersByEmail.execute(email);
         return _convertInOutput(users);
     }
 
     @QueryMapping
     public Collection<UserOutput> findAllByCpf(String cpf) {
-        Collection<User> users = ReadUsersByCpf.execute(cpf);
+        Collection<User> users = readUsersByCpf.execute(cpf);
         return _convertInOutput(users);
     }
 
