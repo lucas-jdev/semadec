@@ -8,9 +8,11 @@ import javax.persistence.OneToOne;
 import br.ifrn.semadec.entities.course.Course;
 import br.ifrn.semadec.entities.sport.Sport;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 
 @Embeddable
 @Builder
+@EqualsAndHashCode
 public class TeamId implements Serializable {
 
     @OneToOne
