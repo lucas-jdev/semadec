@@ -13,10 +13,6 @@ public class DeleteRecord {
     @Autowired
     private RecordRepository recordRepository;
 
-    private DeleteRecord() {
-        throw new IllegalStateException("Service class");
-    }
-
     public void execute(UUID id) {
         recordRepository.deleteById(id);
     }
