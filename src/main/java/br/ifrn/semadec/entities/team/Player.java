@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -23,7 +21,10 @@ import lombok.Data;
 public class Player implements Serializable {
 
     @Id
+    private UUID id;
+
     @OneToOne
+    @JoinColumn(name = "id")
     @MapsId
     private User user;
 
