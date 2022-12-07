@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private void _authorizeEndpoints(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/graphql").permitAll()
+                .antMatchers("/graphiql").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
