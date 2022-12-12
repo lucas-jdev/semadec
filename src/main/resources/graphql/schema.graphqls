@@ -25,7 +25,7 @@ type User {
   personalEmail: String!
   gender: Gender
   status: UserStatus
-  birthDate: LocalDate
+  birthDate: String #date
   socialNetworks: [SocialNetwork]
   biography: String
   avatar: String
@@ -79,15 +79,15 @@ type Edition {
   id: ID!
   name: String!
   description: String
-  startDate: LocalDate!
-  endDate: LocalDate!
+  startDate: String! #date
+  endDate: String! #date
   records: [Record]
 }
 
 type Record {
   id: ID!
   description: String!
-  date: LocalDateTime!
+  date: String! #DateTime
   score: Float!
   sport: Sport!
   course: Course!
@@ -97,7 +97,7 @@ type Record {
 
 type Game {
   id: ID!
-  date: LocalDateTime!
+  date: String! #DateTime
   status: StatusGame!
   sport: Sport!
   teams: [Team]
@@ -149,7 +149,7 @@ input UserInput {
   personalEmail: String!
   password: String!
   gender: Gender
-  birthDate: LocalDate
+  birthDate: String #date
   socialNetworks: [SocialNetworkInput]
   photo: String
   biography: String
@@ -196,14 +196,14 @@ input CourseInput {
 input EditionInput {
   name: String!
   description: String
-  startDate: LocalDate!
-  endDate: LocalDate!
+  startDate: String! #date
+  endDate: String! #date
   records: [String]
 }
 
 input RecordInput {
   description: String!
-  date: LocalDateTime!
+  date: String! #DateTime
   score: Float!
   sportId: String!
   courseId: String!
@@ -212,10 +212,10 @@ input RecordInput {
 }
 
 input GameInput {
-  date: LocalDateTime!
+  date: String! #DateTime
   sportId: String!
   teamsId: [TeamIdInput]
-  scores: [ScoreInput]
+  scores: [Float!]
 }
 
 #******* QUERIES ***********#
@@ -224,29 +224,29 @@ type Query {
   users: [User]
   user(id: ID!): User
   login(username: String!, password: String!): User
-  findByCpf(cpf: String!): User
-  findByAcademicEmail(academicEmail: String!): User
-  findByPersonalEmail(personalEmail: String!): User
-  findByMatriculation(matriculation: String!): User
-  findByEmail(email: String!): User
-  findByUsername(username: String!): User
-  findAllByName(name: String!): [User]
-  findAllByEmail(email: String!): [User]
-  findAllByCpf(cpf: String!): [User]
+  findUserByCpf(cpf: String!): User
+  findUserByAcademicEmail(academicEmail: String!): User
+  findUserByPersonalEmail(personalEmail: String!): User
+  findUserByMatriculation(matriculation: String!): User
+  findUserByEmail(email: String!): User
+  findUserByUsername(username: String!): User
+  findAllUsersByName(name: String!): [User]
+  findAllUsersByEmail(email: String!): [User]
+  findAllUsersByCpf(cpf: String!): [User]
 
   flags: [Flag]
   flag(id: ID!): Flag
-  findByName(name: String!): [User]
+  findFlagByName(name: String!): [Flag]
 
   sports: [Sport]
   sport(id: ID!): Sport
-  findByCategory(category: String!)
-  findByName(name: String!): [Sport]
-  findByCategoryGender(categoryGender: CategoryGender!): [Sport]
+  findSportByCategory(category: String!): [Sport]
+  findSportsByName(name: String!): [Sport]
+  findSportsByCategoryGender(categoryGender: CategoryGender!): [Sport]
 
   courses: [Course]
   course(id: ID!): Course
-  findByName(name: String!): [Course]
+  findCoursesByName(name: String!): [Course]
 
   editions: [Edition]
   edition(id: ID!): Edition
