@@ -15,8 +15,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        _authorizeEndpoints(http);
-
         _disableCSRF(http);
 
         _disableFormSpringSecurity(http);
@@ -34,15 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private void _disableCSRF(HttpSecurity http) throws Exception {
         http.csrf().disable();
-    }
-
-    private void _authorizeEndpoints(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/graphql").permitAll()
-                .antMatchers("/graphiql").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
     }
 
 }
