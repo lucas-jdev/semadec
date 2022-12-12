@@ -18,12 +18,12 @@ public class TeamQuery {
     @Autowired
     private ReadTeamById readTeamById;
 
-    @QueryMapping
+    @QueryMapping(name = "team")
     public Team findById(TeamIdInput id) {
         return readTeamById.execute(id);
     }
 
-    @QueryMapping
+    @QueryMapping(name = "teams")
     public Iterable<Team> findAll() {
         return readAllTeams.execute();
     }

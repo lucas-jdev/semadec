@@ -35,7 +35,7 @@ public class FlagQuery {
     }
 
     @QueryMapping
-    public Iterable<Flag> findByName(String name) {
+    public Iterable<Flag> findFlagByName(String name) {
         return readFlagsByName.execute(name);
     }
 

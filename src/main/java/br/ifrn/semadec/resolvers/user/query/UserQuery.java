@@ -76,37 +76,37 @@ public class UserQuery {
     }
 
     @QueryMapping
-    public UserOutput findByEmail(final String email) {
+    public UserOutput findUserByEmail(final String email) {
         User user = readUserByEmail.execute(email);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findByCpf(final String cpf) {
+    public UserOutput findUserByCpf(final String cpf) {
         User user = readUserByCpf.execute(cpf);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findByAcademicEmail(final String academicEmail) {
+    public UserOutput findUserByAcademicEmail(final String academicEmail) {
         User user = readUserByAcademicEmail.execute(academicEmail);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findByPersonalEmail(final String personalEmail) {
+    public UserOutput findUserByPersonalEmail(final String personalEmail) {
         User user = readUserByPersonalEmail.execute(personalEmail);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findByMatriculation(final String matriculation) {
+    public UserOutput findUserByMatriculation(final String matriculation) {
         User user = readUserByMatriculation.execute(matriculation);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findByUsername(final String username) {
+    public UserOutput findUserByUsername(final String username) {
         User user = readUserByUsername.execute(username);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
@@ -118,19 +118,19 @@ public class UserQuery {
     }
 
     @QueryMapping
-    public Collection<UserOutput> findAllByName(String name) {
+    public Collection<UserOutput> findAllUsersByName(String name) {
         Collection<User> users = readUsersByFullName.execute(name);
         return _convertInOutput(users);
     }
 
     @QueryMapping
-    public Collection<UserOutput> findAllByEmail(String email) {
+    public Collection<UserOutput> findAllUsersByEmail(String email) {
         Collection<User> users = readUsersByEmail.execute(email);
         return _convertInOutput(users);
     }
 
     @QueryMapping
-    public Collection<UserOutput> findAllByCpf(String cpf) {
+    public Collection<UserOutput> findAllUsersByCpf(String cpf) {
         Collection<User> users = readUsersByCpf.execute(cpf);
         return _convertInOutput(users);
     }

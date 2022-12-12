@@ -23,7 +23,7 @@ public class CourseQuery {
     @Autowired
     private ReadCoursesByName readCoursesByName;
 
-    @QueryMapping(name = "course")
+    @QueryMapping(name = "courses")
     public Iterable<Course> findAll() {
         return readAllCourses.execute();
     }
@@ -35,7 +35,7 @@ public class CourseQuery {
     }
 
     @QueryMapping
-    public Iterable<Course> findByName(String name) {
+    public Iterable<Course> findCourseByName(String name) {
         return readCoursesByName.execute(name);
     }
 

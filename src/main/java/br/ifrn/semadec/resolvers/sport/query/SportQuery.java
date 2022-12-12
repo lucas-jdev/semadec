@@ -43,17 +43,17 @@ public class SportQuery {
     }
 
     @QueryMapping
-    public Iterable<Sport> findByCategory(String category) {
+    public Iterable<Sport> findSportsByCategory(String category) {
         return readSportsByCategory.execute(category);
     }
 
     @QueryMapping
-    public Iterable<Sport> findByName(String name) {
+    public Iterable<Sport> findSportsByName(String name) {
         return readSportsByName.execute(name);
     }
 
     @QueryMapping
-    public Iterable<Sport> findByCategoryGender(String categoryGender) {
+    public Iterable<Sport> findSportsByCategoryGender(String categoryGender) {
         return readSportsByCategoryGender.execute(categoryGender);
     }
 
