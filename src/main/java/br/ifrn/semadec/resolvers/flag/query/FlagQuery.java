@@ -3,6 +3,7 @@ package br.ifrn.semadec.resolvers.flag.query;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -24,7 +25,7 @@ public class FlagQuery {
     private ReadFlagsByName readFlagsByName;
 
     @QueryMapping(name = "flag")
-    public Flag findById(String id) {
+    public Flag findById(@Argument String id) {
         final var uuid = UUID.fromString(id);
         return readFlagById.execute(uuid);
     }
@@ -35,7 +36,7 @@ public class FlagQuery {
     }
 
     @QueryMapping
-    public Iterable<Flag> findFlagByName(String name) {
+    public Iterable<Flag> findFlagByName(@Argument String name) {
         return readFlagsByName.execute(name);
     }
 

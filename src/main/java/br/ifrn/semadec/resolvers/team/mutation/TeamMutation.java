@@ -1,6 +1,7 @@
 package br.ifrn.semadec.resolvers.team.mutation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 
@@ -20,12 +21,12 @@ public class TeamMutation {
     private UpdateTeam updateTeam;
 
     @MutationMapping
-    public Team createTeam(TeamInput input) {
+    public Team createTeam(@Argument TeamInput input) {
         return createTeam.excute(input);
     }
 
     @MutationMapping
-    public Team updateTeam(TeamId id, TeamInput input) {
+    public Team updateTeam(@Argument TeamId id, @Argument TeamInput input) {
         return updateTeam.execute(id, input);
     }
 

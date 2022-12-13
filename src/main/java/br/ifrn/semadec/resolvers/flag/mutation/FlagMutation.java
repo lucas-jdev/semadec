@@ -3,6 +3,7 @@ package br.ifrn.semadec.resolvers.flag.mutation;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 
@@ -20,12 +21,12 @@ public class FlagMutation {
     private UpdateFlag updateFlag;
 
     @MutationMapping
-    public Flag createFlag(String name) {
+    public Flag createFlag(@Argument String name) {
         return createFlag.execute(name);
     }
 
     @MutationMapping
-    public Flag updateFlag(String id, String name) {
+    public Flag updateFlag(@Argument String id, @Argument String name) {
         final var uuid = UUID.fromString(id);
         return updateFlag.execute(uuid, name);
     }

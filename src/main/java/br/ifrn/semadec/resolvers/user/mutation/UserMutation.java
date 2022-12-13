@@ -3,6 +3,7 @@ package br.ifrn.semadec.resolvers.user.mutation;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 
@@ -23,12 +24,12 @@ public class UserMutation {
     private UpdateUser updateUser;
 
     @MutationMapping
-    public UserOutput save(final UserInput input) {
+    public UserOutput save(@Argument final UserInput input) {
         return createUser.execute(input);
     }
 
     @MutationMapping
-    public UserOutput update(final String id, final UserInput input) {
+    public UserOutput update(@Argument final String id, @Argument final UserInput input) {
         User user = updateUser.execute(UUID.fromString(id), input);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }

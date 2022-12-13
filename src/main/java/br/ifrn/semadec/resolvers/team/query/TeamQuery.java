@@ -1,6 +1,7 @@
 package br.ifrn.semadec.resolvers.team.query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -19,7 +20,7 @@ public class TeamQuery {
     private ReadTeamById readTeamById;
 
     @QueryMapping(name = "team")
-    public Team findById(TeamIdInput id) {
+    public Team findById(@Argument TeamIdInput id) {
         return readTeamById.execute(id);
     }
 

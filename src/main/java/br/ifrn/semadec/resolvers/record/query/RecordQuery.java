@@ -3,6 +3,7 @@ package br.ifrn.semadec.resolvers.record.query;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -32,7 +33,7 @@ public class RecordQuery {
     private ReadRecordsByPlayerUsername readRecordsByPlayerUsername;
 
     @QueryMapping(name = "record")
-    public Record findById(String id) {
+    public Record findById(@Argument String id) {
         final var uuid = UUID.fromString(id);
         return readRecordById.execute(uuid);
     }
@@ -43,13 +44,13 @@ public class RecordQuery {
     }
 
     @QueryMapping
-    public Iterable<Record> findByPlayerFullName(String fullName) {
+    public Iterable<Record> findByPlayerFullName(@Argument String fullName) {
         final String nameFormatted = fullName.toLowerCase();
         return readRecordsByPlayerFullName.execute(nameFormatted);
     }
 
     @QueryMapping
-    public Iterable<Record> findByPlayerUsername(String username) {
+    public Iterable<Record> findByPlayerUsername(@Argument String username) {
         final String usernameFormatted = username.toLowerCase();
         return readRecordsByPlayerUsername.execute(usernameFormatted);
     }

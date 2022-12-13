@@ -3,6 +3,7 @@ package br.ifrn.semadec.resolvers.sport.query;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -32,7 +33,7 @@ public class SportQuery {
     private ReadSportsByCategoryGender readSportsByCategoryGender;
 
     @QueryMapping(name = "sport")
-    public Sport findById(String id) {
+    public Sport findById(@Argument String id) {
         final var uuid = UUID.fromString(id);
         return readSportById.execute(uuid);
     }
@@ -43,17 +44,17 @@ public class SportQuery {
     }
 
     @QueryMapping
-    public Iterable<Sport> findSportsByCategory(String category) {
+    public Iterable<Sport> findSportsByCategory(@Argument String category) {
         return readSportsByCategory.execute(category);
     }
 
     @QueryMapping
-    public Iterable<Sport> findSportsByName(String name) {
+    public Iterable<Sport> findSportsByName(@Argument String name) {
         return readSportsByName.execute(name);
     }
 
     @QueryMapping
-    public Iterable<Sport> findSportsByCategoryGender(String categoryGender) {
+    public Iterable<Sport> findSportsByCategoryGender(@Argument String categoryGender) {
         return readSportsByCategoryGender.execute(categoryGender);
     }
 

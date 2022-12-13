@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -65,48 +66,48 @@ public class UserQuery {
     private LoginUser loginUser;
 
     @QueryMapping
-    public void login(final String username, final String password) {
+    public void login(@Argument final String username, @Argument final String password) {
         loginUser.execute(username, password);
     }
 
     @QueryMapping(name = "user")
-    public UserOutput findById(final String id) {
+    public UserOutput findById(@Argument final String id) {
         User user = readUserById.execute(UUID.fromString(id));
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findUserByEmail(final String email) {
+    public UserOutput findUserByEmail(@Argument final String email) {
         User user = readUserByEmail.execute(email);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findUserByCpf(final String cpf) {
+    public UserOutput findUserByCpf(@Argument final String cpf) {
         User user = readUserByCpf.execute(cpf);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findUserByAcademicEmail(final String academicEmail) {
+    public UserOutput findUserByAcademicEmail(@Argument final String academicEmail) {
         User user = readUserByAcademicEmail.execute(academicEmail);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findUserByPersonalEmail(final String personalEmail) {
+    public UserOutput findUserByPersonalEmail(@Argument final String personalEmail) {
         User user = readUserByPersonalEmail.execute(personalEmail);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findUserByMatriculation(final String matriculation) {
+    public UserOutput findUserByMatriculation(@Argument final String matriculation) {
         User user = readUserByMatriculation.execute(matriculation);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
 
     @QueryMapping
-    public UserOutput findUserByUsername(final String username) {
+    public UserOutput findUserByUsername(@Argument final String username) {
         User user = readUserByUsername.execute(username);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
     }
@@ -118,19 +119,19 @@ public class UserQuery {
     }
 
     @QueryMapping
-    public Collection<UserOutput> findAllUsersByName(String name) {
+    public Collection<UserOutput> findAllUsersByName(@Argument String name) {
         Collection<User> users = readUsersByFullName.execute(name);
         return _convertInOutput(users);
     }
 
     @QueryMapping
-    public Collection<UserOutput> findAllUsersByEmail(String email) {
+    public Collection<UserOutput> findAllUsersByEmail(@Argument String email) {
         Collection<User> users = readUsersByEmail.execute(email);
         return _convertInOutput(users);
     }
 
     @QueryMapping
-    public Collection<UserOutput> findAllUsersByCpf(String cpf) {
+    public Collection<UserOutput> findAllUsersByCpf(@Argument String cpf) {
         Collection<User> users = readUsersByCpf.execute(cpf);
         return _convertInOutput(users);
     }

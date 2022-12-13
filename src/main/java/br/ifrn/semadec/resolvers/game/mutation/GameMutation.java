@@ -3,6 +3,7 @@ package br.ifrn.semadec.resolvers.game.mutation;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 
@@ -21,12 +22,12 @@ public class GameMutation {
     private UpdateGame updateGame;
 
     @MutationMapping
-    public Game createGame(GameInput input) {
+    public Game createGame(@Argument GameInput input) {
         return createGame.execute(input);
     }
 
     @MutationMapping
-    public Game updateGame(String id, GameInput input) {
+    public Game updateGame(@Argument String id, @Argument GameInput input) {
         final var uuid = UUID.fromString(id);
         return updateGame.execute(uuid, input);
     }
