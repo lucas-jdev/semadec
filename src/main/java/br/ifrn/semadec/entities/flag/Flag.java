@@ -26,4 +26,13 @@ public class Flag implements Serializable {
     @ManyToMany(mappedBy = "flags")
     private Set<User> users;
 
+    public Flag() {
+    }
+
+    public Flag(UUID id, String name, Set<User> users) {
+        this.id = id;
+        this.name = name;
+        this.users = users;
+    }
+
 }
