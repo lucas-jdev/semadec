@@ -77,7 +77,10 @@ public class User implements Serializable {
     private byte[] photo;
 
     @ManyToMany
-    @JoinTable(name = "user_flag", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "flag_id"))
+    @JoinTable(
+        name = "user_flag", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "flag_id"))
     private Set<Flag> flags;
 
     public void inactive() {
