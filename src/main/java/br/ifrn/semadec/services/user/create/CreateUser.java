@@ -7,6 +7,7 @@ import br.ifrn.semadec.dtos.user.input.UserInput;
 import br.ifrn.semadec.dtos.user.output.UserOutput;
 import br.ifrn.semadec.entities.user.User;
 import br.ifrn.semadec.repositories.UserRepository;
+import br.ifrn.semadec.utils.encrypt.Cryptographer;
 
 @Service
 public class CreateUser {
@@ -40,7 +41,7 @@ public class CreateUser {
                 .academicEmail(input.getAcademicEmail())
                 .personalEmail(input.getPersonalEmail())
                 .username(input.getUsername())
-                .password(input.getPassword())
+                .password(Cryptographer.encrypt(input.getPassword()))
                 .fullName(input.getFullName())
                 .cpf(input.getCpf())
                 .build();
