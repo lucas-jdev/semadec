@@ -23,12 +23,12 @@ public class UserMutation {
     @Autowired
     private UpdateUser updateUser;
 
-    @MutationMapping
+    @MutationMapping(name = "createUser")
     public UserOutput save(@Argument final UserInput input) {
         return createUser.execute(input);
     }
 
-    @MutationMapping
+    @MutationMapping(name = "updateUser")
     public UserOutput update(@Argument final String id, @Argument final UserInput input) {
         User user = updateUser.execute(UUID.fromString(id), input);
         return (UserOutput) ConvertEntityToDTO.convert(user, UserOutput.class);
