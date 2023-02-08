@@ -18,18 +18,25 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import br.ifrn.semadec.entities.flag.Flag;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Table(name = "users")
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")
+    @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
 
     @Column(nullable = false, length = 100)
@@ -61,6 +68,9 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
+    @Column(length = 500)
+    private String token;
+
     @Column(columnDefinition = "DATE")
     private LocalDate birthDate;
 
@@ -77,10 +87,7 @@ public class User implements Serializable {
     private byte[] photo;
 
     @ManyToMany
-    @JoinTable(
-        name = "user_flag", 
-        joinColumns = @JoinColumn(name = "user_id"), 
-        inverseJoinColumns = @JoinColumn(name = "flag_id"))
+    @JoinTable(name = "user_flag", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "flag_id"))
     private Set<Flag> flags;
 
     public void inactive() {
@@ -93,6 +100,10 @@ public class User implements Serializable {
 
     public void block() {
         this.status = UserStatus.BLOCKED;
+    }
+
+    public void gender(String gender) {
+        this.gender = Gender.valueOf(gender);
     }
 
 }
