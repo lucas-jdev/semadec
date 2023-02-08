@@ -1,6 +1,5 @@
 package br.ifrn.semadec.services.user.read;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.ifrn.semadec.entities.user.User;
@@ -12,8 +11,11 @@ import java.util.UUID;
 @Service
 public class ReadUserById {
 
-    @Autowired
     private UserRepository userRepository;
+
+    public ReadUserById(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public User execute(UUID id) {
         return userRepository.findById(id)
