@@ -1,5 +1,7 @@
 package br.ifrn.semadec.exceptions.graphql_error;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.graphql.execution.DataFetcherExceptionResolverAdapter;
@@ -18,25 +20,18 @@ public class CustomExceptionResolver extends DataFetcherExceptionResolverAdapter
 
     @Override
     protected GraphQLError resolveToSingleError(Throwable exception, DataFetchingEnvironment environment) {
+        exception.printStackTrace();
         return toGraphQLError(exception, environment);
     }
 
-    private ErrorClassification getErrorClassification(Throwable exception) {
-        Class<?> errorClass = exception.getClass();
-        Exception annotation = errorClass.getAnnotation(Exception.class);
-
-        return Optional.of(annotation)
-                .map(this::toErrorTypeAnnotation)
-                .orElse(null);
-    }
-
-    private ErrorType toErrorTypeAnnotation(Exception annotation) {
-        return ErroTypeFunction.getErrorType(annotation.errorType());
+    @Override
+    protected List<GraphQLError> resolveToMultipleErrors(Throwable exception, DataFetchingEnvironment environment) {
+        exception.printStackTrace();
+        return List.of(toGraphQLError(exception, environment));
     }
 
     private GraphQLError toGraphQLError(Throwable exception, DataFetchingEnvironment environment) {
         return GraphqlErrorBuilder.newError()
-                .errorType(getErrorClassification(exception))
                 .message(exception.getMessage())
                 .path(environment.getExecutionStepInfo().getPath())
                 .location(environment.getField().getSourceLocation())
