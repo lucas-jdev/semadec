@@ -1,6 +1,5 @@
 package br.ifrn.semadec.services.user_provider.create;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.ifrn.semadec.dtos.oauth.user.UserOauthInput;
@@ -14,11 +13,16 @@ import br.ifrn.semadec.repositories.UserRepository;
 @Service
 public class CreateUserProvider {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private UserProviderRepository userProviderRepository;
+
+    public CreateUserProvider(
+        UserRepository userRepository,
+        UserProviderRepository userProviderRepository) {
+        this.userRepository = userRepository;
+        this.userProviderRepository = userProviderRepository;
+    }
 
     public UserProvider execute(UserOauthInput input) {
         final Provider provider = input.getUserProviderInput().getProvider();
