@@ -5,10 +5,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-/*
-* configuration of the security of the application
-* Spring security configuration 
-*/
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -18,6 +14,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         _disableCSRF(http);
 
         _disableFormSpringSecurity(http);
+
+        http.authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+                .and().headers().frameOptions().sameOrigin();
 
         _disableLogoutApplication(http);
     }
@@ -31,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private void _disableCSRF(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.csrf()
+                .disable();
     }
 
 }
