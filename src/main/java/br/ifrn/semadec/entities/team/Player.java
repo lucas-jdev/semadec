@@ -10,6 +10,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import br.ifrn.semadec.entities.user.User;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +23,7 @@ import lombok.Data;
 public class Player implements Serializable {
 
     @Id
+    @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
 
     @OneToOne
