@@ -8,7 +8,8 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
-import br.ifrn.semadec.dtos.user.output.UserOutput;
+import br.ifrn.semadec.dtos.user.user_simple.input.UserLoginInput;
+import br.ifrn.semadec.dtos.user.user_simple.output.UserOutput;
 import br.ifrn.semadec.entities.user.User;
 import br.ifrn.semadec.services.user.login.LoginUser;
 import br.ifrn.semadec.services.user.read.ReadAllUsers;
@@ -25,6 +26,8 @@ import br.ifrn.semadec.services.user.read.ReadUsersByFullName;
 import br.ifrn.semadec.utils.converter.ConvertEntityToDTO;
 
 import java.util.UUID;
+
+import javax.validation.Valid;
 
 @Controller
 public class UserQuery {
@@ -66,8 +69,8 @@ public class UserQuery {
     private LoginUser loginUser;
 
     @QueryMapping
-    public void login(@Argument final String username, @Argument final String password) {
-        loginUser.execute(username, password);
+    public void login(@Argument @Valid UserLoginInput input) {
+        loginUser.execute(input);
     }
 
     @QueryMapping(name = "user")
