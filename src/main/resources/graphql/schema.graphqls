@@ -1,3 +1,7 @@
+# UNIONS
+
+union UserOauth = User | UserProvider
+
 #* types
 
 type SocialNetwork {
@@ -13,6 +17,38 @@ type TeamId {
 }
 
 # todo: SCHEMAS
+
+type UserProvider {
+  username: String!
+  fullName: String
+  matriculation: String
+  phone: String
+  cpf: String
+  academicEmail: String
+  personalEmail: String
+  token: String!
+  provider: Provider!
+}
+
+
+type UserOutput {
+  id: ID!
+  username: String!
+  fullName: String!
+  matriculation: String!
+  phone: String!
+  cpf: String!
+  academicEmail: String!
+  personalEmail: String!
+  gender: Gender
+  status: UserStatus
+  birthDate: String #date
+  socialNetworks: [SocialNetwork]
+  biography: String
+  avatar: String
+  flags: [Flag]
+  likes: Int
+}
 
 type User {
   id: ID!
@@ -137,14 +173,36 @@ enum StatusGame {
   CANCELED
 }
 
+enum Provider {
+  GOOGLE
+  SUAP
+}
+
 #? ****** INPUTS ***********#
+
+input UserOauthInput {
+  userInput: UserInput
+  userProvider: UserProviderInput
+}
+
+input UserProviderInput {
+  username: String!
+  fullName: String!
+  matriculation: String!
+  phone: String
+  cpf: String!
+  academicEmail: String!
+  token: String!
+  personalEmail: String!
+  provider: Provider!
+}
 
 input UserInput {
   username: String!
   fullName: String!
   matriculation: String!
-  phone: String!
-  cpf: String
+  phone: String
+  cpf: String!
   academicEmail: String!
   personalEmail: String!
   password: String!
@@ -153,6 +211,29 @@ input UserInput {
   socialNetworks: [SocialNetworkInput]
   photo: String
   biography: String
+}
+
+input UserLoginInput {
+  username: String!
+  password: String
+  token: String
+  provider: Provider
+}
+
+input UserInputUpdate {
+  username: String
+  fullName: String
+  matriculation: String
+  phone: String
+  cpf: String
+  academicEmail: String
+  personalEmail: String
+  password: String
+  gender: Gender
+  birthDate: String #date
+  photo: String
+  biography: String
+  socialNetworks: [SocialNetworkInput]
 }
 
 input SocialNetworkInput {
@@ -221,9 +302,9 @@ input GameInput {
 #******* QUERIES ***********#
 
 type Query {
-  users: [User]
+  users: [UserOutput]
   user(id: ID!): User
-  login(username: String!, password: String!): User
+  login(input: UserLoginInput!): User
   findUserByCpf(cpf: String!): User
   findUserByAcademicEmail(academicEmail: String!): User
   findUserByPersonalEmail(personalEmail: String!): User
@@ -264,8 +345,8 @@ type Query {
 #******* MUTATIONS ***********#
 
 type Mutation {
-  createUser(userInput: UserInput): User
-  UpdateUser(id: ID!, userInput: UserInput): User
+  createUser(userInput: UserOauthInput): UserOutput
+  updateUser(id: ID!, userInput: UserInputUpdate): User
 
   createFlag(name: String!): Flag
   updateFlag(id: ID!, name: String!): Flag
@@ -285,3 +366,4 @@ type Mutation {
   createGame(gameInput: GameInput): Game
   updateGame(id: ID!, gameInput: GameInput): Game
 }
+
