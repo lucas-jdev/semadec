@@ -1,16 +1,14 @@
 package br.ifrn.semadec.repositories;
 
-import java.util.UUID;
 import java.util.Collection;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 import br.ifrn.semadec.entities.user.User;
 import br.ifrn.semadec.entities.user.UserStatus;
 
-@Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
     @Query("""

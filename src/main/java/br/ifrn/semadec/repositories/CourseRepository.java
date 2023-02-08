@@ -5,11 +5,9 @@ import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 import br.ifrn.semadec.entities.course.Course;
 
-@Repository
 public interface CourseRepository extends JpaRepository<Course, UUID> {
 
     @Query("""
