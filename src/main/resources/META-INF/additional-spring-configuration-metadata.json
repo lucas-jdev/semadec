@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "semadec.jwt.secret",
+    "type": "java.lang.String",
+    "description": "secret key for jwt authentication"
+  },
+  {
+    "name": "semadec.jwt.limit",
+    "type": "java.lang.Long",
+    "description": "limit time for token jwt"
+  }
+]}
