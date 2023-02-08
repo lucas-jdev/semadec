@@ -1,11 +1,19 @@
-package br.ifrn.semadec.dtos.user.output;
+package br.ifrn.semadec.dtos.user.user_simple.output;
 
+import java.io.Serializable;
+
+import br.ifrn.semadec.dtos.user.UserInterface;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class UserOutput {
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserOutput implements Serializable, UserInterface {
 
     private String id;
     private String username;
