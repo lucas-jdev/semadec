@@ -99,6 +99,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
                 """)
     Collection<User> findAllByCpf(String cpf);
 
+    @Deprecated
     @Query("""
             SELECT
                 u
@@ -107,14 +108,9 @@ public interface UserRepository extends JpaRepository<User, UUID> {
             WHERE
                 u.status = 'ACTIVE'
             AND
-                (lower(u.academicEmail) = ?1
-                or lower(u.personalEmail) = ?1
-                or lower(u.username) = ?1
-                or u.cpf = ?1)
-            AND
-                u.password = ?2
-                """)
-    User findByUsernameAndPassword(String email, String password);
+                lower(u.username) = ?1
+                    """)
+    User findByUsernameAndPassword(String username);
 
     @Query("""
             SELECT
